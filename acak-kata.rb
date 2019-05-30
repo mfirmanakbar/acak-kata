@@ -21,13 +21,13 @@ def generate_random(value)
     end
   end
 
-  arrRes.join('')
+  arrRes.join("-")
 
 end
 
 def random_if_not_same(value)
   first_random = generate_random(value)
-  while first_random == value
+  while first_random.split("-") == value
     first_random = generate_random(value)
   end
   return first_random
@@ -36,26 +36,28 @@ end
 index_soal = 0
 sisa_soal = fruits.length
 isCorrect = false
+puts
 while sisa_soal > 0
 
   isCorrect = false
   random_result = random_if_not_same(fruits[index_soal])
-  puts random_result
+  soal = "Tebak kata acak berikut: " + random_result
+  puts soal
   while !isCorrect
-    puts "Tabak kata di atas: "
+    puts "Jawaban: "
     answer = gets.chomp().upcase
     if answer == fruits[index_soal]
       sisa_soal -= 1
       index_soal += 1
       poin = fruits.length - sisa_soal
+      puts
       puts "BENAR, Poin anda adalah #{poin.to_s} "
       puts
       isCorrect = true
     else
       puts
-      puts random_result
       puts "SALAH"
-      puts
+      puts soal
       isCorrect = false
     end
   end
